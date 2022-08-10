@@ -40,14 +40,8 @@ contract SimplNft is ERC721 {
 
         uint256 id = _tokenIds.current();
         _safeMint(owner, id);
-        _setTokenURI(id, metadataURI);
+         _tokenUris[id] = metadataURI;
 
         return id;
-    }
-
-    function _setTokenURI(uint256 id, string memory metadataURI)
-    private
-    {
-        _tokenUris[id] = metadataURI;
     }
 }

@@ -1,4 +1,5 @@
 module.exports = {
-    deployChild : require('./deploy_child'),
+    deployNft : require('./deploy_nft'),
+    mintNft : require('./mint_nft'),
     timeMachine : require('./time_machine'),
 }
