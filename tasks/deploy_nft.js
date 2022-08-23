@@ -8,7 +8,7 @@ use(Web3ClientPlugin);
 
 // Example: npx hardhat deployNft --network maticMumbai
 // npx hardhat deployNft --network maticMumbai
-// npx hardhat verify --network maticMumbai {address} "SimplNft" "SMPLT"
+// npx hardhat verify --network maticMumbai 0x294C79F1e431923917EecE75283F473a6CAbCC40 "SimplNft" "SMPLT"
 task('deployNft', 'deploy nft')
     .setAction(async ({},{ ethers }) => {
         const [signer] = await ethers.getSigners();
