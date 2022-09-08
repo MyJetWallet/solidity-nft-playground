@@ -9,6 +9,7 @@ use(Web3ClientPlugin);
 // Task for getting all donater addresses
 // Example: npx hardhat deploy --network maticMumbai
 // npx hardhat mintNft --network maticMumbai --nft-address 0x294C79F1e431923917EecE75283F473a6CAbCC40 --receiver 0x83ceAC6A4b7060348d8Ebf4996817962Db7e3758 --nft-url lol-url.com 
+// npx hardhat mintNft --network maticMumbai --nft-address 0x294C79F1e431923917EecE75283F473a6CAbCC40 --receiver 0x2d994596fF9F32Be776D86ee5690ffFCEE8B891F --nft-url lol-url.com 
 task('mintNft', 'mint nft')
     .addParam("nftAddress", 'Nft contract address', '', types.string)
     .addParam("receiver", 'Receiver address', '', types.string)
