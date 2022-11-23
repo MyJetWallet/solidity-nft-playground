@@ -13,18 +13,25 @@ contract SimplNftPool is ERC1155URIStorage, ERC165Storage, AccessControl, ERC115
     bytes32 public constant URI_SETTER_ROLE = keccak256("URI_SETTER_ROLE");
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
-    constructor(string memory uri_) ERC1155(uri_) {
+    string public name;
+
+    constructor(string memory uri_, string memory name_) ERC1155(uri_) {
         _setBaseURI(uri_);
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _grantRole(URI_SETTER_ROLE, msg.sender);
         _grantRole(MINTER_ROLE, msg.sender);
         _registerInterface(type(IERC1155).interfaceId);
         _registerInterface(type(IERC1155MetadataURI).interfaceId);
+        name = name_;
     }
 
     function setURI(string memory newuri) public onlyRole(URI_SETTER_ROLE) {
         _setURI(newuri);
         _setBaseURI(newuri);
+    }
+
+    function setTokenURI(uint256 id, string memory newuri) public onlyRole(URI_SETTER_ROLE) {
+         _setURI(id, string(abi.encodePacked(newuri)));
     }
 
     function mint(address account, uint256 id, uint256 amount, bytes memory data)
@@ -40,6 +47,10 @@ contract SimplNftPool is ERC1155URIStorage, ERC165Storage, AccessControl, ERC115
         onlyRole(MINTER_ROLE)
     {
         _mintBatch(to, ids, amounts, data);
+    }
+
+    function tokenURI(uint256 _tokenId) public view returns (string memory) {
+        return super.uri(_tokenId);
     }
 
     function uri(uint256 tokenId) public view virtual override(ERC1155URIStorage, ERC1155) returns (string memory) {

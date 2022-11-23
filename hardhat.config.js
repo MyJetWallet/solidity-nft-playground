@@ -7,7 +7,7 @@ require("@nomiclabs/hardhat-waffle");
 require('./tasks');
 
 module.exports = {
-  defaultNetwork: "maticMumbai",
+  defaultNetwork: "polygon",
   networks: {
     //Ganache mnemonic: anger song bitter enlist father calm butter cigar twelve nut kit system
     ganache: {
@@ -25,7 +25,7 @@ module.exports = {
     polygon: {
       url: "https://polygon-mainnet.g.alchemy.com/v2/"+process.env.ALCHEMY_POLYGON_API_KEY,
       accounts: [process.env.POLYGON_PRIVATE_KEY],
-      gasPrice: 35000000000,
+      gasPrice: 115000000000,
       saveDeployments: true,
     },
     goerli: {

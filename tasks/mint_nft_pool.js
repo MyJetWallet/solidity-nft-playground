@@ -8,19 +8,20 @@ use(Web3ClientPlugin);
 
 // Task for getting all donater addresses
 // Example: npx hardhat deploy --network maticMumbai
-// npx hardhat mintNftPool --network maticMumbai --nft-address 0x1eE3F66e73fb595925DebC90d663FB4de3fA6d8c --receiver 0x52A6434213a99B03fE1f0C59B33d8EC088A9FB8D --token-id 2 
+// npx hardhat mintNftPool --network maticMumbai --nft-address 0xD66c9fCBb9e4458c0670eF4B8258D7A4F73ee63F --receiver 0x52A6434213a99B03fE1f0C59B33d8EC088A9FB8D --token-id 10 --nft-url 10
 task('mintNftPool', 'mint nft')
     .addParam("nftAddress", 'Nft contract address', '', types.string)
     .addParam("receiver", 'Receiver address', '', types.string)
     .addParam("tokenId", 'TokenId to mint', '', types.string)
-    //.addParam("nftUrl", 'nft url', '', types.string)
-    .setAction(async ({nftAddress, receiver, tokenId},{ ethers }) => {
+    .addParam("nftUrl", 'nft url', '', types.string)
+    .setAction(async ({nftAddress, receiver, tokenId, nftUrl},{ ethers }) => {
         const [signer] = await ethers.getSigners();
 
         const SimplNftPool = await ethers.getContractFactory("SimplNftPool");
 
         const token = await SimplNftPool.attach(nftAddress);
-        var url = web3.utils.asciiToHex(tokenId);
+        //var url = web3.utils.asciiToHex(tokenId);
+        var url = web3.utils.asciiToHex(nftUrl);
         var mintTx = await token.mint(receiver, tokenId, 1, url);
         var receipt = await mintTx.wait();
         
